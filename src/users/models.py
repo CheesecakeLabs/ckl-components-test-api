@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser, BaseUserManager
 
 
-class CustomAccountManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -38,10 +38,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    description = models.TextField(null=True, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+
     REQUIRED_FIELDS = []
     USERNAME_FIELD = 'email'
 
-    objects = CustomAccountManager()
+    objects = CustomUserManager()
 
     def natural_key(self):
         return self.email

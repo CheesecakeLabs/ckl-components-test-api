@@ -13,6 +13,7 @@ django-rest-auth = "*"
 cklauth = "*"
 django-anymail = {extras = ["mailgun"]}
 gunicorn = "*"
+django-rest-framework = "*"
 
 [dev-packages]
 
